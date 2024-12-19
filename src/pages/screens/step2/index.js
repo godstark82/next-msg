@@ -38,7 +38,7 @@ export default function Step2 () {
           <div className='max-w-2xl w-full bg-white p-8 rounded-lg shadow-lg'>
             <div className='flex flex-col items-center'>
               <p className='text-rose-700 text-2xl font-bold mb-8 text-center'>
-                Okay, Now I know It's You. But still
+                Okay, Now I know It&apos;s You. But still
               </p>
             </div>
             <p className='text-rose-800 text-2xl font-bold mb-8 text-center'>
