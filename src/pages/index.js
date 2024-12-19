@@ -1,115 +1,135 @@
-import Image from "next/image";
-import localFont from "next/font/local";
+/*
+![1.] Welcome Message and Confirmation to view more
+![2.] Show starting what and how and why etc
+![3.] Show ultimate everything.
+![4.] End with a thank you and a call to action.
+*/
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
+import { useState, useEffect } from 'react'
+import { useRouter } from 'next/router'
+import addSession, { getPass } from '../services/server'
 
-export default function Home() {
+export default function Home () {
+  const [name, setName] = useState('')
+  const [passkey, setPasskey] = useState('')
+  const [message, setMessage] = useState('')
+  const [messageType, setMessageType] = useState('')
+  const [loading, setLoading] = useState(true)
+  const [pass, setPass] = useState('')
+  const router = useRouter()
+
+  useEffect(() => {
+    getPass()
+      .then(password => {
+        setPass(password)
+        setLoading(false)
+      })
+      .catch(err => {
+        console.error(err)
+        setLoading(false)
+      })
+  }, [])
+
+  const requestFullscreen = () => {
+    if (document.documentElement.requestFullscreen) {
+      document.documentElement.requestFullscreen()
+    } else if (document.documentElement.webkitRequestFullscreen) {
+      document.documentElement.webkitRequestFullscreen()
+    } else if (document.documentElement.msRequestFullscreen) {
+      document.documentElement.msRequestFullscreen()
+    }
+  }
+
+  const handleSubmit = async e => {
+    e.preventDefault()
+    requestFullscreen()
+    if (passkey === pass) {
+      addSession(name, passkey).then(() => {
+        setMessage('Access Granted')
+        setMessageType('success')
+        localStorage.setItem('name', name)
+
+        setTimeout(() => {
+          router.push('/screens/step2')
+        }, 1000)
+      })
+    } else {
+      setMessage('Access Denied')
+      setMessageType('error')
+    }
+  }
+
   return (
-    <div
-      className={`${geistSans.variable} ${geistMono.variable} grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]`}
-    >
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/pages/index.js
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <div className='relative flex flex-col min-h-screen bg-rose-50'>
+      <div className='mountain-bg'></div>
+      <nav className='relative z-10 bg-rose-800 p-4'>
+        <div className='container mx-auto z-10'>
+          <div className='flex justify-between items-center'>
+            <h1 className='text-white text-2xl font-bold'>Step 1</h1>
+            <div className='w-64 bg-rose-600 h-2 rounded-full'>
+              <div className='w-1/4 bg-rose-400 h-2 rounded-full'></div>
+            </div>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+      </nav>
+      <div className='relative z-10 flex flex-col flex-1 justify-center items-center'>
+        <h1 className='text-rose-800 text-4xl font-bold mb-8'>Welcome</h1>
+        {loading ? (
+          <div className='flex justify-center items-center'>
+            <div className='animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-rose-500'></div>
+          </div>
+        ) : (
+          <form className='flex flex-col gap-4 z-10' onSubmit={handleSubmit}>
+            <input
+              className='p-2 rounded-md border-2 border-rose-300'
+              type='text'
+              placeholder='Enter your name'
+              value={name}
+              autoComplete='off'
+              onChange={e => setName(e.target.value)}
+              required
+            />
+            <input
+              className='p-2 rounded-md border-2 border-rose-300'
+              type='password'
+              placeholder='Enter PassKey To Access'
+              value={passkey}
+              autoComplete='off'
+              onChange={e => setPasskey(e.target.value)}
+              required
+            />
+            <button
+              className='bg-rose-500 hover:bg-rose-600 text-white p-2 rounded-md'
+              type='submit'
+            >
+              Access
+            </button>
+          </form>
+        )}
+      </div>
+      {message && (
+        <div
+          className={`fixed bottom-0 left-0 right-0 flex items-center justify-between p-4 shadow-lg ${
+            messageType === 'success' ? 'bg-rose-500' : 'bg-red-500'
+          }`}
         >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+          <div className='flex items-center'>
+            <span className='text-white ml-2'>{message}</span>
+          </div>
+          <button
+            onClick={() => setMessage('')}
+            className='text-white hover:text-rose-200 focus:outline-none'
+          >
+            <svg className='w-5 h-5' fill='currentColor' viewBox='0 0 20 20'>
+              <path
+                fillRule='evenodd'
+                d='M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z'
+                clipRule='evenodd'
+              />
+            </svg>
+          </button>
+        </div>
+      )}
     </div>
-  );
+  )
 }
