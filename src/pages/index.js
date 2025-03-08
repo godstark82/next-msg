@@ -50,7 +50,7 @@ export default function Home () {
         localStorage.setItem('name', name)
 
         setTimeout(() => {
-          router.push('/screens/step2')
+          router.push('/screens/step3')
         }, 1000)
       })
     } else {
@@ -65,7 +65,7 @@ export default function Home () {
       <nav className='relative z-10 bg-rose-800 p-4'>
         <div className='container mx-auto z-10'>
           <div className='flex justify-between items-center'>
-            <h1 className='text-white text-2xl font-bold'>Step 1</h1>
+            <h1 className='text-white text-2xl font-bold'>Login to Continue</h1>
             <div className='w-64 bg-rose-600 h-2 rounded-full'>
               <div className='w-1/4 bg-rose-400 h-2 rounded-full'></div>
             </div>

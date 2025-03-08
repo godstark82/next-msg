@@ -63,7 +63,7 @@ export default function Step3 () {
         <nav className='bg-rose-100 p-4'>
           <div className='container mx-auto'>
             <div className='flex justify-between items-center'>
-              <h1 className='text-rose-800 text-2xl font-bold'>Hi</h1>
+              <h1 className='text-rose-800 text-2xl font-bold'>Happy Birthday Tinguuuu</h1>
               <div className='w-64 bg-rose-200 h-2 rounded-full'>
                 <div className='w-2/4 bg-rose-400 h-2 rounded-full'></div>
               </div>
@@ -85,49 +85,19 @@ export default function Step3 () {
               ) : (
                 <>
                   <p className='text-rose-900 leading-relaxed'>
-                    {textLines.slice(0, visibleLines).map((line, index) => (
+                    {textLines.map((line, index) => (
                       <span key={index}>
                         {line}
                         <br />
                       </span>
                     ))}
                   </p>
-                  {visibleLines < textLines.length && (
-                    <p className='text-rose-500 text-sm mt-4 text-center italic'>
-                      Please click on the button below to continue
-                    </p>
-                  )}
+                 
                 </>
               )}
             </div>
 
-            <div className='flex justify-center gap-4'>
-              {!loading && visibleLines >= textLines.length ? (
-                <>
-                  <button
-                    onClick={handleNo}
-                    className='bg-red-500 hover:bg-red-600 text-white px-8 py-3 rounded-md transition-colors'
-                  >
-                    NO
-                  </button>
-                  <button
-                    onClick={handleYes}
-                    className='bg-green-500 hover:bg-green-600 text-white px-8 py-3 rounded-md transition-colors'
-                  >
-                    YES
-                  </button>
-                </>
-              ) : (
-                !loading && (
-                  <button
-                    onClick={handleReadMore}
-                    className='bg-rose-500 hover:bg-rose-600 text-white px-8 py-3 rounded-md transition-colors'
-                  >
-                    Read More
-                  </button>
-                )
-              )}
-            </div>
+           
           </div>
         </div>
       </div>
