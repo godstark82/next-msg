@@ -63,7 +63,7 @@ export default function Step3 () {
         <nav className='bg-rose-100 p-4'>
           <div className='container mx-auto'>
             <div className='flex justify-between items-center'>
-              <h1 className='text-rose-800 text-2xl font-bold'>Happy Birthday Tinguuuu</h1>
+              <h1 className='text-rose-800 text-2xl font-bold'>Your Title here...</h1>
               <div className='w-64 bg-rose-200 h-2 rounded-full'>
                 <div className='w-2/4 bg-rose-400 h-2 rounded-full'></div>
               </div>
