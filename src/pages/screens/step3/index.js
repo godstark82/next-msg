@@ -128,7 +128,7 @@ export default function Step3 () {
                 <span className='text-2xl'>🧸</span>
               </div>
               <p className='text-center text-rose-700 my-2'>
-                Sorryyyyyyyyy pookie... 🤗
+                Happy Birthday Bandarr 🐒
               </p>
               <div className='flex justify-between'>
                 <span className='text-2xl'>🧸</span>
