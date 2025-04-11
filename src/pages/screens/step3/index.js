@@ -62,10 +62,10 @@ export default function Step3 () {
       <div className='flex flex-col h-screen bg-rose-50 relative'>
         {/* Decorative teddy bears using emoji and CSS */}
         <div className='absolute top-4 left-4 text-4xl animate-bounce'>
-          🐒
+          🧸
         </div>
         <div className='absolute top-4 right-4 text-4xl animate-pulse'>
-          🐒
+          🧸
         </div>
         
         <nav className='bg-rose-100 p-4'>
@@ -82,7 +82,7 @@ export default function Step3 () {
           <div className='max-w-2xl w-full bg-white p-8 rounded-lg shadow-lg relative'>
             {/* Teddy bear peeking from top of card */}
             <div className='absolute -top-6 left-1/2 transform -translate-x-1/2 text-5xl'>
-              🐒
+              🧸
             </div>
             
             <div className='flex flex-col items-center'>
@@ -93,7 +93,7 @@ export default function Step3 () {
             <div className='bg-rose-50 p-6 rounded-md mb-8 max-h-[70vh] overflow-y-auto border-2 border-rose-200 relative'>
               {/* Small teddy in corner of text box */}
               <div className='absolute bottom-2 right-2 text-2xl opacity-80'>
-                🐒
+                🧸
               </div>
               
               {loading ? (
@@ -116,23 +116,23 @@ export default function Step3 () {
             </div>
             {/* Teddy bear decorations around content */}
             <div className='flex justify-center items-center gap-4 mb-4'>
-              <span className='text-4xl transform rotate-[-15deg]'>🐒</span>
+              <span className='text-4xl transform rotate-[-15deg]'>🧸</span>
               <span className='text-5xl'>❤️</span>
-              <span className='text-4xl transform rotate-[15deg]'>🐒</span>
+              <span className='text-4xl transform rotate-[15deg]'>🧸</span>
             </div>
             
             {/* Teddy bear border effect */}
             <div className='border-2 border-rose-200 p-4 rounded-lg mb-4'>
               <div className='flex justify-between'>
-                <span className='text-2xl'>🐒</span>
-                <span className='text-2xl'>🐒</span>
+                <span className='text-2xl'>🧸</span>
+                <span className='text-2xl'>🧸</span>
               </div>
               <p className='text-center text-rose-700 my-2'>
                 Happy Birthday Bandarr 🐒🐒🐒
               </p>
               <div className='flex justify-between'>
-                <span className='text-2xl'>🐒</span>
-                <span className='text-2xl'>🐒</span>
+                <span className='text-2xl'>🧸</span>
+                <span className='text-2xl'>🧸</span>
               </div>
             </div>
           </div>
@@ -140,10 +140,10 @@ export default function Step3 () {
         
         {/* Bottom corner teddies */}
         <div className='absolute bottom-4 left-4 text-4xl animate-pulse'>
-          🐒
+          🧸
         </div>
         <div className='absolute bottom-4 right-4 text-4xl animate-bounce'>
-          🐒
+          🧸
         </div>
       </div>
     </>
